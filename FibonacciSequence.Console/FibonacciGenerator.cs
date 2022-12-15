@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BenchmarkDotNet.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,51 @@ namespace FibonacciSequence.Console
 {
     public class FibonacciGenerator
     {
+        public FibonacciGenerator()
+        {
+        }
 
+        [Benchmark]
+        public List<int> Generate6List() => Generate6List(10000);
+        public List<int> Generate6List(int sequenceLength)
+        {
+            int index = 0;
+            List<int> list = new List<int>();
+
+            foreach (var generate in Generate6())
+            {
+                list.Add(generate);
+                index++;
+                if (index == 10)
+                {
+                    break;
+                }
+
+            }
+
+            return list;
+        }
+
+        public IEnumerable<int> Generate6()
+        {
+            int first = 0;
+            int second = 1;
+
+            yield return first;
+            yield return second;
+
+            while (true)
+            {
+                int aux = first;
+                first = second;
+                second = second + aux;
+                yield return second;
+            }
+
+        }
+
+        [Benchmark]
+        public List<int> Generate5() => Generate5(1000);
         public List<int> Generate5(int sequenceLength)
         {
             List<int> list = new List<int>();
@@ -24,7 +69,8 @@ namespace FibonacciSequence.Console
 
             return list;
         }
-
+        [Benchmark]
+        public List<int> Generate4() => Generate4(1000);
         public List<int> Generate4(int sequenceLength)
         {
             List<int> list = new List<int>();
@@ -46,7 +92,8 @@ namespace FibonacciSequence.Console
 
             return list;
         }
-
+        [Benchmark]
+        public List<int> Generate3() => Generate3(1000);
         public List<int> Generate3(int sequenceLength)
         {
             List<int> list = new List<int>();
@@ -69,6 +116,8 @@ namespace FibonacciSequence.Console
             return list;
         }
 
+        [Benchmark]
+        public List<int> Generate2() => Generate2(1000);
         public List<int> Generate2(int sequenceLength)
         {
             List<int> list = new List<int>();
@@ -92,7 +141,8 @@ namespace FibonacciSequence.Console
 
             return list;
         }
-
+        [Benchmark]
+        public List<int> Generate1() => Generate1(1000);
         public List<int> Generate1(int sequenceLength)
         {
             List<int> list = new List<int>();

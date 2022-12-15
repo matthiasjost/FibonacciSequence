@@ -1,10 +1,14 @@
-﻿namespace FibonacciSequence.Console
+﻿using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Running;
+
+namespace FibonacciSequence.Console
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            System.Console.WriteLine("Hello, World!");
+            var summary = BenchmarkRunner.Run<FibonacciGenerator>();
+            System.Console.ReadLine();
         }
     }
 }
