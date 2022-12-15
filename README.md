@@ -1,6 +1,6 @@
 # FibonacciSequence
 
-Trying different appraches including benchmarks just for fun!
+I was trying different approaches, including benchmarks, just for fun!
 
 ## See also
 - https://blog.nimblepros.com/blogs/benchmarking-in-dotnet/
