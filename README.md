@@ -1,6 +1,8 @@
-# FibonacciSequence
+# 🕵️‍♂️ FibonacciSequence
 
 I was trying different approaches, including benchmarks, just for fun!
+
+Done with C# and Visual Studio 2022.
 
 ## See also
 - https://blog.nimblepros.com/blogs/benchmarking-in-dotnet/
