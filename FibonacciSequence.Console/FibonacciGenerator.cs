@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace FibonacciSequence.Console
 {
+    [MemoryDiagnoser]
     public class FibonacciGenerator
     {
         public FibonacciGenerator()
@@ -141,7 +142,7 @@ namespace FibonacciSequence.Console
 
             return list;
         }
-        [Benchmark]
+        [Benchmark(Baseline = true)]
         public List<int> Generate1() => Generate1(1000);
         public List<int> Generate1(int sequenceLength)
         {
