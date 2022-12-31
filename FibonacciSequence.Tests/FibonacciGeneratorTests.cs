@@ -92,8 +92,7 @@ namespace FibonacciSequence.Tests
         {
             FibonacciGenerator generator = new FibonacciGenerator();
 
-            List<int> sequence = generator.Generate6List(10);
-
+            List<int> sequence = generator.Generate6YieldToList();
 
             Assert.AreEqual(0, sequence[0]);
             Assert.AreEqual(1, sequence[1]);

@@ -8,7 +8,6 @@ namespace FibonacciSequence.Console
         static void Main(string[] args)
         {
             var summary = BenchmarkRunner.Run<FibonacciGenerator>();
-            System.Console.ReadLine();
         }
     }
 }
