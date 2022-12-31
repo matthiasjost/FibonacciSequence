@@ -7,35 +7,31 @@ using System.Threading.Tasks;
 
 namespace FibonacciSequence.Console
 {
-    [MemoryDiagnoser]
     public class FibonacciGenerator
     {
-        public FibonacciGenerator()
-        {
-        }
+        private const int SequenceLength = 100_000;
+
+        // - Solution 6: Trying Something Different – Yield
 
         [Benchmark]
-        public List<int> Generate6List() => Generate6List(10000);
+        public List<int> Generate6List() => Generate6List(SequenceLength);
         public List<int> Generate6List(int sequenceLength)
         {
             int index = 0;
             List<int> list = new List<int>();
 
-            foreach (var generate in Generate6())
+            foreach (var generate in Generate6Yield())
             {
                 list.Add(generate);
                 index++;
-                if (index == 10)
+                if (index == sequenceLength)
                 {
                     break;
                 }
-
             }
-
             return list;
         }
-
-        public IEnumerable<int> Generate6()
+        public IEnumerable<int> Generate6Yield()
         {
             int first = 0;
             int second = 1;
@@ -45,16 +41,17 @@ namespace FibonacciSequence.Console
 
             while (true)
             {
-                int aux = first;
+                int temp = first;
+
                 first = second;
-                second = second + aux;
+                second = second + temp;
+                
                 yield return second;
             }
-
         }
 
         [Benchmark]
-        public List<int> Generate5() => Generate5(1000);
+        public List<int> Generate5() => Generate5(SequenceLength);
         public List<int> Generate5(int sequenceLength)
         {
             List<int> list = new List<int>();
@@ -71,7 +68,7 @@ namespace FibonacciSequence.Console
             return list;
         }
         [Benchmark]
-        public List<int> Generate4() => Generate4(1000);
+        public List<int> Generate4() => Generate4(SequenceLength);
         public List<int> Generate4(int sequenceLength)
         {
             List<int> list = new List<int>();
@@ -94,7 +91,7 @@ namespace FibonacciSequence.Console
             return list;
         }
         [Benchmark]
-        public List<int> Generate3() => Generate3(1000);
+        public List<int> Generate3() => Generate3(SequenceLength);
         public List<int> Generate3(int sequenceLength)
         {
             List<int> list = new List<int>();
@@ -118,7 +115,7 @@ namespace FibonacciSequence.Console
         }
 
         [Benchmark]
-        public List<int> Generate2() => Generate2(1000);
+        public List<int> Generate2() => Generate2(SequenceLength);
         public List<int> Generate2(int sequenceLength)
         {
             List<int> list = new List<int>();
@@ -143,7 +140,7 @@ namespace FibonacciSequence.Console
             return list;
         }
         [Benchmark(Baseline = true)]
-        public List<int> Generate1() => Generate1(1000);
+        public List<int> Generate1() => Generate1(SequenceLength);
         public List<int> Generate1(int sequenceLength)
         {
             List<int> list = new List<int>();
