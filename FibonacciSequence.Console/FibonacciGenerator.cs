@@ -1,6 +1,7 @@
 ﻿using BenchmarkDotNet.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,32 @@ namespace FibonacciSequence.Console
     public class FibonacciGenerator
     {
         private const int SequenceLength = 1000;
+
+        [Benchmark]
+        public ArrayList Generate8() => Generate8(SequenceLength);
+        public ArrayList Generate8(int sequenceLength)
+        {
+            ArrayList list = new ArrayList();
+
+            list.Add(0);
+            list.Add(1);
+
+            int next = 0;
+
+            for (int index = 1; index < sequenceLength; index++)
+            {
+                next = 0;
+
+                for (int i = index; i > index - 2; i--)
+                {
+                    next += (int)list[i];
+                }
+
+                list.Add(next);
+            }
+
+            return list;
+        }
 
         [Benchmark]
         public List<int> Generat7YieldTake() => Generate7Yield(SequenceLength);
