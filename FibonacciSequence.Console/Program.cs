@@ -1,5 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
+using System;
 
 namespace FibonacciSequence.Console
 {
@@ -8,6 +9,7 @@ namespace FibonacciSequence.Console
         static void Main(string[] args)
         {
             var summary = BenchmarkRunner.Run<FibonacciGenerator>();
+            System.Console.ReadLine();
         }
     }
 }
