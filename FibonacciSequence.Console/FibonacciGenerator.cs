@@ -14,6 +14,33 @@ namespace FibonacciSequence.Console
         private const int SequenceLength = 1000;
 
         [Benchmark]
+        public int[] Generate9() => Generate9(SequenceLength);
+        public int[] Generate9(int sequenceLength)
+        {
+            int[] arrayInt = new int[sequenceLength];
+
+            arrayInt[0] = 0;
+            arrayInt[0] = 1;
+
+            int next = 0;
+
+            for (int index = 1; index < sequenceLength; index++)
+            {
+                next = 0;
+
+                for (int i = index; i > index - 2; i--)
+                {
+                    next += arrayInt[i];
+                }
+
+                arrayInt[index] = next;
+            }
+
+            return arrayInt;
+        }
+
+
+        [Benchmark]
         public ArrayList Generate8() => Generate8(SequenceLength);
         public ArrayList Generate8(int sequenceLength)
         {
