@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace FibonacciSequence.Console
 {
+    [RPlotExporter]
     public class FibonacciGenerator
     {
-        private const int SequenceLength = 10_000;
+        private const int SequenceLength = 1000;
 
-        // - Solution 6: Trying Something Different – Yield
         [Benchmark]
         public List<int> Generat7YieldTake() => Generate7Yield(SequenceLength);
         public List<int> Generate7Yield(int sequenceLength)
@@ -146,6 +146,7 @@ namespace FibonacciSequence.Console
 
             return list;
         }
+
         [Benchmark(Baseline = true)]
         public List<int> Generate1() => Generate1(SequenceLength);
         public List<int> Generate1(int sequenceLength)
