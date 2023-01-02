@@ -106,7 +106,7 @@ namespace FibonacciSequence.Console
 
                 first = second;
                 second = second + temp;
-                
+
                 yield return second;
             }
         }
