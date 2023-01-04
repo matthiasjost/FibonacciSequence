@@ -1,17 +1,39 @@
 ﻿using BenchmarkDotNet.Attributes;
-using System;
-using System.Collections.Generic;
 using System.Collections;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FibonacciSequence.Console
 {
     [RPlotExporter]
+    [MemoryDiagnoser]
     public class FibonacciGenerator
     {
         private const int SequenceLength = 1000;
+
+        [Benchmark]
+        public Span<int> Generate10() => Generate10(SequenceLength);
+        public Span<int> Generate10(int sequenceLength)
+        {
+            Span<int> arrayInt = new Span<int>(new int[sequenceLength]);
+
+            arrayInt[0] = 0;
+            arrayInt[1] = 1;
+
+            int next = 0;
+
+            for (int index = 2; index < sequenceLength; index++)
+            {
+                next = 0;
+
+                for (int i = index; i > index - 3; i--)
+                {
+                    next += arrayInt[i];
+                }
+
+                arrayInt[index] = next;
+            }
+
+            return arrayInt;
+        }
 
         [Benchmark]
         public int[] Generate9() => Generate9(SequenceLength);
@@ -20,15 +42,15 @@ namespace FibonacciSequence.Console
             int[] arrayInt = new int[sequenceLength];
 
             arrayInt[0] = 0;
-            arrayInt[0] = 1;
+            arrayInt[1] = 1;
 
             int next = 0;
 
-            for (int index = 1; index < sequenceLength; index++)
+            for (int index = 2; index < sequenceLength; index++)
             {
                 next = 0;
 
-                for (int i = index; i > index - 2; i--)
+                for (int i = index; i > index - 3; i--)
                 {
                     next += arrayInt[i];
                 }
