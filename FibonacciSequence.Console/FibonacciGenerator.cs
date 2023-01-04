@@ -10,6 +10,24 @@ namespace FibonacciSequence.Console
         private const int SequenceLength = 1000;
 
         [Benchmark]
+        public int[] Generate11() => Generate11(SequenceLength);
+        public int[] Generate11(int sequenceLength)
+        {
+            int[] arrayInt = new int[sequenceLength];
+
+            arrayInt[0] = 0;
+            arrayInt[1] = 1;
+
+
+            for (int index = 2; index < sequenceLength; index++)
+            {
+                arrayInt[index] = arrayInt[index-2] + arrayInt[index - 1];
+            }
+
+            return arrayInt;
+        }
+
+        [Benchmark]
         public Span<int> Generate10() => Generate10(SequenceLength);
         public Span<int> Generate10(int sequenceLength)
         {

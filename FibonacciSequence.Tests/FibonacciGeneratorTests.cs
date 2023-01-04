@@ -168,5 +168,22 @@ namespace FibonacciSequence.Tests
             Assert.AreEqual(5, sequence[5]);
             Assert.AreEqual(8, sequence[6]);
         }
+
+
+        [TestMethod]
+        public void TestSequence11()
+        {
+            FibonacciGenerator generator = new FibonacciGenerator();
+
+            int[] sequence = generator.Generate11();
+
+            Assert.AreEqual(0, sequence[0]);
+            Assert.AreEqual(1, sequence[1]);
+            Assert.AreEqual(1, sequence[2]);
+            Assert.AreEqual(2, sequence[3]);
+            Assert.AreEqual(3, sequence[4]);
+            Assert.AreEqual(5, sequence[5]);
+            Assert.AreEqual(8, sequence[6]);
+        }
     }
 }
