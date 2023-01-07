@@ -21,7 +21,7 @@ namespace FibonacciSequence.Console
 
             for (int index = 2; index < sequenceLength; index++)
             {
-                arrayInt[index] = arrayInt[index-2] + arrayInt[index - 1];
+                arrayInt[index] = arrayInt[index - 2] + arrayInt[index - 1];
             }
 
             return arrayInt;
@@ -162,12 +162,12 @@ namespace FibonacciSequence.Console
 
             while (list.Count < sequenceLength)
             {
-                list.Add(list.Skip(list.Count - 2).First()
-                         + list.Skip(list.Count - 1).First());
+                list.Add(list.Skip(list.Count - 2).Take(2).Sum());
             }
 
             return list;
         }
+
         [Benchmark]
         public List<int> Generate4() => Generate4(SequenceLength);
         public List<int> Generate4(int sequenceLength)
@@ -191,6 +191,7 @@ namespace FibonacciSequence.Console
 
             return list;
         }
+
         [Benchmark]
         public List<int> Generate3() => Generate3(SequenceLength);
         public List<int> Generate3(int sequenceLength)
@@ -206,8 +207,9 @@ namespace FibonacciSequence.Console
             {
                 next = 0;
 
-                next += list.AsEnumerable().Reverse().Skip(0).First();
-                next += list.AsEnumerable().Reverse().Skip(1).First();
+                IEnumerable<int> reversedList = list.AsEnumerable().Reverse();
+                next += reversedList.Skip(0).First();
+                next += reversedList.Skip(1).First();
 
                 list.Add(next);
             }
@@ -251,19 +253,15 @@ namespace FibonacciSequence.Console
             list.Add(1);
 
             int next = 0;
-
             for (int index = 1; index < sequenceLength; index++)
             {
                 next = 0;
-
                 for (int i = index; i > index - 2; i--)
                 {
                     next += list[i];
                 }
-
                 list.Add(next);
             }
-
             return list;
         }
     }
