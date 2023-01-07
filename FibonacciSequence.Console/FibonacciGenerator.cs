@@ -253,6 +253,7 @@ namespace FibonacciSequence.Console
             list.Add(1);
 
             int next = 0;
+
             for (int index = 1; index < sequenceLength; index++)
             {
                 next = 0;
