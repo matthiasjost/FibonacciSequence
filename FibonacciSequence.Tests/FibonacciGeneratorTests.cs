@@ -13,7 +13,7 @@ namespace FibonacciSequence.Tests
         {
             FibonacciGenerator generator = new FibonacciGenerator();
 
-            List<int> sequence = generator.Generate1(10);
+            List<double> sequence = generator.Generate1(10);
 
             Assert.AreEqual(0, sequence[0]);
             Assert.AreEqual(1, sequence[1]);
@@ -29,7 +29,7 @@ namespace FibonacciSequence.Tests
         {
             FibonacciGenerator generator = new FibonacciGenerator();
 
-            List<int> sequence = generator.Generate2(10);
+            List<double> sequence = generator.Generate2(10);
 
             Assert.AreEqual(0, sequence[0]);
             Assert.AreEqual(1, sequence[1]);
@@ -45,7 +45,7 @@ namespace FibonacciSequence.Tests
         {
             FibonacciGenerator generator = new FibonacciGenerator();
 
-            List<int> sequence = generator.Generate3(10);
+            List<double> sequence = generator.Generate3(10);
 
             Assert.AreEqual(0, sequence[0]);
             Assert.AreEqual(1, sequence[1]);
@@ -60,7 +60,7 @@ namespace FibonacciSequence.Tests
         {
             FibonacciGenerator generator = new FibonacciGenerator();
 
-            List<int> sequence = generator.Generate4(10);
+            List<double> sequence = generator.Generate4(10);
 
             Assert.AreEqual(0, sequence[0]);
             Assert.AreEqual(1, sequence[1]);
@@ -75,7 +75,7 @@ namespace FibonacciSequence.Tests
         {
             FibonacciGenerator generator = new FibonacciGenerator();
 
-            List<BigInteger> sequence = generator.Generate5(47);
+            List<double> sequence = generator.Generate5(47);
 
             Assert.AreEqual(0, sequence[0]);
             Assert.AreEqual(1, sequence[1]);
@@ -91,7 +91,7 @@ namespace FibonacciSequence.Tests
         {
             FibonacciGenerator generator = new FibonacciGenerator();
 
-            List<int> sequence = generator.Generate6YieldToList();
+            List<double> sequence = generator.Generate6YieldToList();
 
             Assert.AreEqual(0, sequence[0]);
             Assert.AreEqual(1, sequence[1]);
@@ -107,7 +107,7 @@ namespace FibonacciSequence.Tests
         {
             FibonacciGenerator generator = new FibonacciGenerator();
 
-            List<int> sequence = generator.Generat7YieldTake();
+            List<double> sequence = generator.Generat7YieldTake();
 
             Assert.AreEqual(0, sequence[0]);
             Assert.AreEqual(1, sequence[1]);
@@ -125,13 +125,13 @@ namespace FibonacciSequence.Tests
 
             ArrayList sequence = generator.Generate8();
 
-            Assert.AreEqual(0, sequence[0]);
-            Assert.AreEqual(1, sequence[1]);
-            Assert.AreEqual(1, sequence[2]);
-            Assert.AreEqual(2, sequence[3]);
-            Assert.AreEqual(3, sequence[4]);
-            Assert.AreEqual(5, sequence[5]);
-            Assert.AreEqual(8, sequence[6]);
+            Assert.AreEqual((double)0, sequence[0]);
+            Assert.AreEqual((double)1, sequence[1]);
+            Assert.AreEqual((double)1, sequence[2]);
+            Assert.AreEqual((double)2, sequence[3]);
+            Assert.AreEqual((double)3, sequence[4]);
+            Assert.AreEqual((double)5, sequence[5]);
+            Assert.AreEqual((double)8, sequence[6]);
         }
 
         [TestMethod]
@@ -139,7 +139,7 @@ namespace FibonacciSequence.Tests
         {
             FibonacciGenerator generator = new FibonacciGenerator();
 
-            int[] sequence = generator.Generate9();
+            double[] sequence = generator.Generate9();
 
             Assert.AreEqual(0, sequence[0]);
             Assert.AreEqual(1, sequence[1]);
@@ -155,7 +155,7 @@ namespace FibonacciSequence.Tests
         {
             FibonacciGenerator generator = new FibonacciGenerator();
 
-            Span<int> sequence = generator.Generate10();
+            Span<double> sequence = generator.Generate10();
 
             Assert.AreEqual(0, sequence[0]);
             Assert.AreEqual(1, sequence[1]);
@@ -172,7 +172,7 @@ namespace FibonacciSequence.Tests
         {
             FibonacciGenerator generator = new FibonacciGenerator();
 
-            int[] sequence = generator.Generate11();
+            double[] sequence = generator.Generate11();
 
             Assert.AreEqual(0, sequence[0]);
             Assert.AreEqual(1, sequence[1]);
