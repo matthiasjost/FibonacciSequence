@@ -157,7 +157,7 @@ namespace FibonacciSequence.Console
 
 
         [Benchmark]
-        public List<BigInteger> Generate5() => Generate52(SequenceLength);
+        public List<BigInteger> Generate5() => Generate5(SequenceLength);
         public List<BigInteger> Generate5(int sequenceLength)
         {
             List<BigInteger> list = new List<BigInteger>();
