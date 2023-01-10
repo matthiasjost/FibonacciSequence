@@ -8,24 +8,25 @@ namespace FibonacciSequence.Console
     [MemoryDiagnoser]
     public class FibonacciGenerator
     {
-        private const int SequenceLength = 1000;
-
+        private int SequenceLength = 1000;
 
         [Benchmark]
-        public List<double> Generate12() => FibonacciSeries(SequenceLength);
-        public List<double> FibonacciSeries(int firstNItem)
+        public List<BigInteger> Generate12() => FibonacciSeries(SequenceLength);
+        public List<BigInteger> FibonacciSeries(int firstNItem)
         {
-
-            List<double> store = new();
+            List<BigInteger> store = new();
             const int stackArrSize = 25;
-            Span<double> fibo = stackalloc double[stackArrSize];
+            BigInteger[] bigIntList = new BigInteger[stackArrSize];
+            Span<BigInteger> fibo = new Span<BigInteger>(bigIntList);
 
             fibo[0] = 0;
             fibo[1] = 1;
+            fibo[2] = 1;
             store.Add(fibo[0]);
-            store.Add(fibo[1]); 
+            store.Add(fibo[1]);
+            store.Add(fibo[2]);
 
-            for (int i = 2; i < firstNItem; i++)
+            for (int i = 3; i < firstNItem; i++)
             {
                 int k = i;
                 k %= stackArrSize; // loop in an array of 25 elements stored in stack
@@ -43,38 +44,37 @@ namespace FibonacciSequence.Console
                 store.Add(fibo[k]);
             }
 
-
             return store;
         }
 
         [Benchmark]
-        public int[] Generate11() => Generate11(SequenceLength);
-        public int[] Generate11(int sequenceLength)
+        public BigInteger[] Generate11() => Generate11(SequenceLength);
+        public BigInteger[] Generate11(int sequenceLength)
         {
-            int[] arrayInt = new int[sequenceLength];
+            BigInteger[] arrayFibonacci = new BigInteger[sequenceLength];
 
-            arrayInt[0] = 0;
-            arrayInt[1] = 1;
+            arrayFibonacci[0] = 0;
+            arrayFibonacci[1] = 1;
 
 
             for (int index = 2; index < sequenceLength; index++)
             {
-                arrayInt[index] = arrayInt[index - 2] + arrayInt[index - 1];
+                arrayFibonacci[index] = arrayFibonacci[index - 2] + arrayFibonacci[index - 1];
             }
 
-            return arrayInt;
+            return arrayFibonacci;
         }
 
         [Benchmark]
-        public Span<int> Generate10() => Generate10(SequenceLength);
-        public Span<int> Generate10(int sequenceLength)
+        public Span<BigInteger> Generate10() => Generate10(SequenceLength);
+        public Span<BigInteger> Generate10(int sequenceLength)
         {
-            Span<int> arrayInt = new Span<int>(new int[sequenceLength]);
+            Span<BigInteger> arrayFibonacci = new Span<BigInteger>(new BigInteger[sequenceLength]);
 
-            arrayInt[0] = 0;
-            arrayInt[1] = 1;
+            arrayFibonacci[0] = 0;
+            arrayFibonacci[1] = 1;
 
-            int next = 0;
+            BigInteger next = 0;
 
             for (int index = 2; index < sequenceLength; index++)
             {
@@ -82,25 +82,25 @@ namespace FibonacciSequence.Console
 
                 for (int i = index; i > index - 3; i--)
                 {
-                    next += arrayInt[i];
+                    next += arrayFibonacci[i];
                 }
 
-                arrayInt[index] = next;
+                arrayFibonacci[index] = next;
             }
 
-            return arrayInt;
+            return arrayFibonacci;
         }
 
         [Benchmark]
-        public int[] Generate9() => Generate9(SequenceLength);
-        public int[] Generate9(int sequenceLength)
+        public BigInteger[] Generate9() => Generate9(SequenceLength);
+        public BigInteger[] Generate9(int sequenceLength)
         {
-            int[] arrayInt = new int[sequenceLength];
+            BigInteger[] arrayFibonacci = new BigInteger[sequenceLength];
 
-            arrayInt[0] = 0;
-            arrayInt[1] = 1;
+            arrayFibonacci[0] = 0;
+            arrayFibonacci[1] = 1;
 
-            int next = 0;
+            BigInteger next = 0;
 
             for (int index = 2; index < sequenceLength; index++)
             {
@@ -108,13 +108,13 @@ namespace FibonacciSequence.Console
 
                 for (int i = index; i > index - 3; i--)
                 {
-                    next += arrayInt[i];
+                    next += arrayFibonacci[i];
                 }
 
-                arrayInt[index] = next;
+                arrayFibonacci[index] = next;
             }
 
-            return arrayInt;
+            return arrayFibonacci;
         }
 
 
@@ -124,10 +124,10 @@ namespace FibonacciSequence.Console
         {
             ArrayList list = new ArrayList();
 
-            list.Add(0);
-            list.Add(1);
+            list.Add((BigInteger)0);
+            list.Add((BigInteger)1);
 
-            int next = 0;
+            BigInteger next = 0;
 
             for (int index = 1; index < sequenceLength; index++)
             {
@@ -135,7 +135,7 @@ namespace FibonacciSequence.Console
 
                 for (int i = index; i > index - 2; i--)
                 {
-                    next += (int)list[i];
+                    next += (BigInteger)list[i];
                 }
 
                 list.Add(next);
@@ -145,20 +145,20 @@ namespace FibonacciSequence.Console
         }
 
         [Benchmark]
-        public List<int> Generat7YieldTake() => Generate7Yield(SequenceLength);
-        public List<int> Generate7Yield(int sequenceLength)
+        public List<BigInteger> Generat7YieldTake() => Generate7Yield(SequenceLength);
+        public List<BigInteger> Generate7Yield(int sequenceLength)
         {
-            List<int> list = new List<int>();
+            List<BigInteger> list = new List<BigInteger>();
             list = Generate6Yield().Take(sequenceLength).ToList();
             return list;
         }
 
         [Benchmark]
-        public List<int> Generate6YieldToList() => Generate6Yield(SequenceLength);
-        public List<int> Generate6Yield(int sequenceLength)
+        public List<BigInteger> Generate6YieldToList() => Generate6Yield(SequenceLength);
+        public List<BigInteger> Generate6Yield(int sequenceLength)
         {
             int index = 0;
-            List<int> list = new List<int>();
+            List<BigInteger> list = new List<BigInteger>();
             foreach (var generate in Generate6Yield())
             {
                 list.Add(generate);
@@ -170,17 +170,17 @@ namespace FibonacciSequence.Console
             }
             return list;
         }
-        public IEnumerable<int> Generate6Yield()
+        public IEnumerable<BigInteger> Generate6Yield()
         {
-            int first = 0;
-            int second = 1;
+            BigInteger first = 0;
+            BigInteger second = 1;
 
             yield return first;
             yield return second;
 
             while (true)
             {
-                int temp = first;
+                BigInteger temp = first;
 
                 first = second;
                 second = second + temp;
@@ -205,15 +205,15 @@ namespace FibonacciSequence.Console
         }
 
         [Benchmark]
-        public List<int> Generate4() => Generate4(SequenceLength);
-        public List<int> Generate4(int sequenceLength)
+        public List<BigInteger> Generate4() => Generate4(SequenceLength);
+        public List<BigInteger> Generate4(int sequenceLength)
         {
-            List<int> list = new List<int>();
+            List<BigInteger> list = new List<BigInteger>();
 
             list.Add(0);
             list.Add(1);
 
-            int next = 0;
+            BigInteger next = 0;
 
             for (int index = 1; index < sequenceLength; index++)
             {
@@ -229,21 +229,21 @@ namespace FibonacciSequence.Console
         }
 
         [Benchmark]
-        public List<int> Generate3() => Generate3(SequenceLength);
-        public List<int> Generate3(int sequenceLength)
+        public List<BigInteger> Generate3() => Generate3(SequenceLength);
+        public List<BigInteger> Generate3(int sequenceLength)
         {
-            List<int> list = new List<int>();
+            List<BigInteger> list = new List<BigInteger>();
 
             list.Add(0);
             list.Add(1);
 
-            int next = 0;
+            BigInteger next = 0;
 
             for (int index = 1; index < sequenceLength; index++)
             {
                 next = 0;
 
-                IEnumerable<int> reversedList = list.AsEnumerable().Reverse();
+                IEnumerable<BigInteger> reversedList = list.AsEnumerable().Reverse();
                 next += reversedList.Skip(0).First();
                 next += reversedList.Skip(1).First();
 
@@ -254,15 +254,15 @@ namespace FibonacciSequence.Console
         }
 
         [Benchmark]
-        public List<int> Generate2() => Generate2(SequenceLength);
-        public List<int> Generate2(int sequenceLength)
+        public List<BigInteger> Generate2() => Generate2(SequenceLength);
+        public List<BigInteger> Generate2(int sequenceLength)
         {
-            List<int> list = new List<int>();
+            List<BigInteger> list = new List<BigInteger>();
 
             list.Add(0);
             list.Add(1);
 
-            int next = 0;
+            BigInteger next = 0;
 
             for (int index = 1; index < sequenceLength; index++)
             {
@@ -280,15 +280,15 @@ namespace FibonacciSequence.Console
         }
 
         [Benchmark(Baseline = true)]
-        public List<int> Generate1() => Generate1(SequenceLength);
-        public List<int> Generate1(int sequenceLength)
+        public List<BigInteger> Generate1() => Generate1(SequenceLength);
+        public List<BigInteger> Generate1(int sequenceLength)
         {
-            List<int> list = new List<int>();
+            List<BigInteger> list = new List<BigInteger>();
 
             list.Add(0);
             list.Add(1);
 
-            int next = 0;
+            BigInteger next = 0;
 
             for (int index = 1; index < sequenceLength; index++)
             {
